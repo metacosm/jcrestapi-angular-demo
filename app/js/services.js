@@ -4,7 +4,7 @@
 
 var jcrServices = angular.module('jcrServices', ['ngResource']);
 var baseAPI = 'http://localhost:8080/modules/api';
-var byIdAPI = baseAPI + '/nodes';
+var byIdAPI = baseAPI + '/nodes/';
 
 /*jcrServices.factory('NodeById', ['$resource',
     function ($resource) {

@@ -13,8 +13,7 @@ demoApp.config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
         $routeProvider.
             when('/', {
-                templateUrl: 'partials/default.html',
-                controller: 'DemoCtrl'
+                redirectTo: '/nodes/root'
             }).
             when('/nodes/:nodeId', {
                 templateUrl: 'partials/node.html',
