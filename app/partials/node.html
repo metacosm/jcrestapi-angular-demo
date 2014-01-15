@@ -1,0 +1,11 @@
+<h1>{{node.name}}</h1>
+
+        <a href="#">{{node._links.self.href}}</a>
+
+        {{node._links}}
+
+        <ul>
+            <li ng-repeat="link in node._links">
+                <a ng-href="{{link.href}}">{{link.name}}</a>
+            </li>
+        </ul>

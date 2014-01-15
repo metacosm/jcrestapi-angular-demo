@@ -1,0 +1,1 @@
+# A simple AngularJS application demoing how to use the Jahia REST API
