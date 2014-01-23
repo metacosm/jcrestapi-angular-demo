@@ -17,3 +17,12 @@ demoControllers.controller('NodeCtrl', ['$scope', '$routeParams', 'Node',
         }
     }
 ]);
+
+demoControllers.controller('PathCtrl', ['$scope', '$routeParams', 'Node',
+    function ($scope, $routeParams, Node) {
+        var path = $routeParams.path;
+        Node.getByPath(path).then(function (node) {
+            $scope.node = node;
+        });
+    }
+]);

@@ -13,11 +13,15 @@ demoApp.config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
         $routeProvider.
             when('/', {
-                redirectTo: '/nodes/root'
+                redirectTo: '/api/nodes/root'
             }).
-            when('/nodes/:nodeId', {
+            when('/api/nodes/:nodeId', {
                 templateUrl: 'partials/node.html',
                 controller: 'NodeCtrl'
+            }).
+            when('/api/byPath/:path*', {
+                templateUrl: 'partials/node.html',
+                controller: 'PathCtrl'
             }).
             otherwise({
                 redirectTo: '/'

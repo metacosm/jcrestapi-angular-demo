@@ -3,14 +3,10 @@
 /* Services */
 
 var jcrServices = angular.module('jcrServices', ['ngResource']);
-var baseAPI = 'http://localhost:8080/modules/api';
+var base = 'http://localhost:8080/modules';
+var baseAPI = base + '/api';
+var byPathAPI = baseAPI + '/byPath/';
 var byIdAPI = baseAPI + '/nodes/';
-
-/*jcrServices.factory('NodeById', ['$resource',
-    function ($resource) {
-        return $resource('http://localhost:8080/modules/api/nodes/:nodeId', {}, {});
-    }
-]);*/
 
 // Based on http://stackoverflow.com/questions/11850025/recommended-way-of-getting-data-from-the-server
 jcrServices.factory('Node', function ($http) {
@@ -23,6 +19,13 @@ jcrServices.factory('Node', function ($http) {
     // a static method to retrieve a node by id
     Node.getById = function (id) {
         return $http.get(byIdAPI + id).then(function (response) {
+            return new Node(response.data);
+        });
+    };
+
+    // a static method to retrieve a node by its path
+    Node.getByPath = function (path) {
+        return $http.get(byPathAPI + path).then(function (response) {
             return new Node(response.data);
         });
     };
@@ -41,6 +44,14 @@ jcrServices.factory('Node', function ($http) {
             node.id = response.data.id;
             return node;
         });
+    }
+
+    Node.prototype.link = function (rel) {
+        return '#' + this._links[rel].href;
+    }
+
+    Node.prototype.safeName = function () {
+        return this.name ? this.name : "root";
     }
 
     return Node;
