@@ -14,7 +14,7 @@ jcrServices.factory('Node', function ($http) {
     // updating data on the server
     var Node = function (data) {
         angular.extend(this, data);
-    }
+    };
 
     // a static method to retrieve a node by id
     Node.getById = function (id) {
@@ -44,15 +44,15 @@ jcrServices.factory('Node', function ($http) {
             node.id = response.data.id;
             return node;
         });
-    }
+    };
 
     Node.prototype.link = function (rel) {
         return '#' + this._links[rel].href;
-    }
+    };
 
     Node.prototype.safeName = function () {
         return this.name ? this.name : "root";
-    }
+    };
 
     return Node;
 });
