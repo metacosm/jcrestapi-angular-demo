@@ -1,5 +1,9 @@
 <h1>Sessions</h1>
 
 <ul>
-    <li ng-repeat="session in sessions">{{session.name}}</li>
+    <li ng-repeat="session in sessions">
+        <a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
+
+        <p>{{session.properties.text.value}}</p>
+    </li>
 </ul>
