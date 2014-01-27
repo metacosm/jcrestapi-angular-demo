@@ -70,6 +70,11 @@ jcrServices.factory('DemoSession', function ($http) {
                 sessions.push(new DemoSession(response.data[i]));
             }
 
+            // make sure sessions are sorted by name (should be done using the query but doesn't work)
+            sessions.sort(function (a, b) {
+                return (a.name > b.name) - (b.name > a.name);
+            });
+
             return sessions;
         });
     };
