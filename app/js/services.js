@@ -9,36 +9,36 @@ var byPathAPI = baseAPI + '/byPath/';
 var byIdAPI = baseAPI + '/nodes/';
 
 // Based on http://stackoverflow.com/questions/11850025/recommended-way-of-getting-data-from-the-server
-jcrServices.factory('JCRNode', function ($http) {
+jcrServices.factory('DemoSession', function ($http) {
     // Node is a class which we can use for retrieving and
     // updating data on the server
-    var JCRNode = function (data) {
+    var DemoSession = function (data) {
         angular.extend(this, data);
     };
 
     // a static method to retrieve a node by id
-    JCRNode.getById = function (id) {
+    DemoSession.getById = function (id) {
         return $http.get(byIdAPI + id).then(function (response) {
-            return new Node(response.data);
+            return new DemoSession(response.data);
         });
     };
 
     // a static method to retrieve a node by its path
-    JCRNode.getByPath = function (path) {
+    DemoSession.getByPath = function (path) {
         return $http.get(byPathAPI + path).then(function (response) {
-            return new Node(response.data);
+            return new DemoSession(response.data);
         });
     };
 
     // retrieve the root node
-    JCRNode.getRoot = function () {
+    DemoSession.getRoot = function () {
         return $http.get(byIdAPI).then(function (response) {
-            return new Node(response.data);
+            return new DemoSession(response.data);
         });
     };
 
     // an instance method to create a new node
-    JCRNode.prototype.create = function (parent) {
+    DemoSession.prototype.create = function (parent) {
         var node = this;
         return $http.put(byIdAPI + parent.id, node).then(function (response) {
             node.id = response.data.id;
@@ -46,20 +46,12 @@ jcrServices.factory('JCRNode', function ($http) {
         });
     };
 
-    JCRNode.prototype.link = function (rel) {
+    DemoSession.prototype.link = function (rel) {
         return '#' + this._links[rel].href;
     };
 
-    JCRNode.prototype.safeName = function () {
+    DemoSession.prototype.safeName = function () {
         return this.name ? this.name : "root";
-    };
-
-    return JCRNode;
-});
-
-jcrServices.factory('DemoSession', function ($http) {
-    var DemoSession = function (data) {
-        angular.extend(this, data);
     };
 
     DemoSession.getSessions = function () {
