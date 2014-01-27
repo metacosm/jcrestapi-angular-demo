@@ -55,7 +55,7 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.getSessions = function () {
-        return $http.get(baseAPI + '/byType/genericnt__event').then(function (response) {
+        return $http.get(baseAPI + '/byType/genericnt__event?depth=1').then(function (response) {
             var sessions = [];
             for ( var i in response.data )
             {
