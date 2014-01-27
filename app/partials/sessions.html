@@ -1,8 +1,8 @@
 <h1>Sessions</h1>
 
-<ul>
-    <li ng-repeat="session in sessions">
-        <a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
+<ul class="list-unstyled container">
+    <li ng-repeat="session in sessions" class="jumbotron">
+        <h2><a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a></h2>
 
         <p>{{session.cleanedDescription()}}</p>
 
