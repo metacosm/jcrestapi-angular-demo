@@ -56,3 +56,23 @@ jcrServices.factory('JCRNode', function ($http) {
 
     return JCRNode;
 });
+
+jcrServices.factory('DemoSession', function ($http) {
+    var DemoSession = function (data) {
+        angular.extend(this, data);
+    };
+
+    DemoSession.getSessions = function () {
+        return $http.get(baseAPI + '/byType/genericnt__event').then(function (response) {
+            var sessions = [];
+            for ( var i in response.data )
+            {
+                sessions.push(new DemoSession(response.data[i]));
+            }
+
+            return sessions;
+        });
+    };
+
+    return DemoSession;
+});

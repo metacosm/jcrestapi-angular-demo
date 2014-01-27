@@ -15,6 +15,10 @@ demoApp.config(['$routeProvider', '$httpProvider',
             when('/', {
                 redirectTo: '/api/nodes/root'
             }).
+            when('/sessions', {
+                templateUrl: 'partials/sessions.html',
+                controller: 'SessionCtrl'
+            }).
             when('/api/nodes/:nodeId', {
                 templateUrl: 'partials/node.html',
                 controller: 'NodeCtrl'

@@ -26,3 +26,12 @@ demoControllers.controller('PathCtrl', ['$scope', '$routeParams', 'JCRNode',
         });
     }
 ]);
+
+
+demoControllers.controller('SessionCtrl', ['$scope', '$routeParams', 'DemoSession',
+    function ($scope, $routeParams, DemoSession) {
+        DemoSession.getSessions().then(function (sessions) {
+            $scope.sessions = sessions;
+        });
+    }
+]);
