@@ -3,25 +3,25 @@
 /* Controllers */
 var demoControllers = angular.module('demoControllers', []);
 
-demoControllers.controller('NodeCtrl', ['$scope', '$routeParams', 'Node',
-    function ($scope, $routeParams, Node) {
+demoControllers.controller('NodeCtrl', ['$scope', '$routeParams', 'JCRNode',
+    function ($scope, $routeParams, JCRNode) {
         var id = $routeParams.nodeId;
         if (id && id != 'root') {
-            Node.getById(id).then(function (node) {
+            JCRNode.getById(id).then(function (node) {
                 $scope.node = node;
             });
         } else {
-            Node.getRoot().then(function (node) {
+            JCRNode.getRoot().then(function (node) {
                 $scope.node = node;
             });
         }
     }
 ]);
 
-demoControllers.controller('PathCtrl', ['$scope', '$routeParams', 'Node',
-    function ($scope, $routeParams, Node) {
+demoControllers.controller('PathCtrl', ['$scope', '$routeParams', 'JCRNode',
+    function ($scope, $routeParams, JCRNode) {
         var path = $routeParams.path;
-        Node.getByPath(path).then(function (node) {
+        JCRNode.getByPath(path).then(function (node) {
             $scope.node = node;
         });
     }
