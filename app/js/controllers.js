@@ -36,8 +36,8 @@ demoControllers.controller('SessionCtrl', ['$scope', '$routeParams', 'DemoSessio
     }
 ]);
 
-demoControllers.controller('RatingCtrl', ['$scope',
-    function ($scope) {
+demoControllers.controller('RatingCtrl', ['$scope', 'DemoSession',
+    function ($scope, DemoSession) {
         $scope.rate = 0;
         $scope.max = 10;
 
@@ -45,5 +45,9 @@ demoControllers.controller('RatingCtrl', ['$scope',
             $scope.overStar = value;
             $scope.percent = 100 * (value / $scope.max);
         };
+
+        $scope.$watch('rate', function (oldValue, newValue) {
+            alert('Old: ' + oldValue + ' New: ' + newValue);
+        });
     }
 ]);
