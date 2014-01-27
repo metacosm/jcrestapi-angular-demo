@@ -54,6 +54,12 @@ jcrServices.factory('DemoSession', function ($http) {
         return this.name ? this.name : "root";
     };
 
+    DemoSession.prototype.cleanedDescription = function() {
+        return String(this.properties.text.value).replace(/<(?:.|\n)*?>/gm, '').replace('&amp;', '&')
+            .replace('&rquot;', '\'').replace('&#39;', '\'').replace('&ldquo;', '\"').replace('&rdquo;', '"')
+            .replace('&nbsp;', '');
+    };
+
     DemoSession.getSessions = function () {
         return $http.get(baseAPI + '/byType/genericnt__event?depth=1').then(function (response) {
             var sessions = [];

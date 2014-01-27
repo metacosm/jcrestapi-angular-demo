@@ -4,7 +4,7 @@
     <li ng-repeat="session in sessions">
         <a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
 
-        <p>{{session.properties.text.value}}</p>
+        <p>{{session.cleanedDescription()}}</p>
 
         <div ng-controller="RatingCtrl">
             <rating value="rate" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
