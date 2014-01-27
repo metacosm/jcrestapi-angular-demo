@@ -35,3 +35,15 @@ demoControllers.controller('SessionCtrl', ['$scope', '$routeParams', 'DemoSessio
         });
     }
 ]);
+
+demoControllers.controller('RatingCtrl', ['$scope',
+    function ($scope) {
+        $scope.rate = 0;
+        $scope.max = 10;
+
+        $scope.hoveringOver = function (value) {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / $scope.max);
+        };
+    }
+]);

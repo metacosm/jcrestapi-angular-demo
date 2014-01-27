@@ -5,5 +5,12 @@
         <a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
 
         <p>{{session.properties.text.value}}</p>
+
+        <div ng-controller="RatingCtrl">
+            <rating value="rate" max="max" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+            <span class="label"
+                  ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
+                  ng-show="overStar">{{percent}}%</span>
+        </div>
     </li>
 </ul>
