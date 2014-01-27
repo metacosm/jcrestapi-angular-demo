@@ -2,7 +2,7 @@
 
 /* Services */
 
-var jcrServices = angular.module('jcrServices', ['ngResource']);
+var jcrServices = angular.module('jcrServices', []);
 var base = 'http://localhost:8080/modules';
 var baseAPI = base + '/api';
 var byPathAPI = baseAPI + '/byPath/';
