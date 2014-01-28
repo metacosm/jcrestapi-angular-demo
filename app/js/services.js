@@ -11,8 +11,9 @@ var byIdAPI = baseAPI + '/nodes/';
 // Based on http://stackoverflow.com/questions/11850025/recommended-way-of-getting-data-from-the-server
 jcrServices.factory('DemoSession', function ($http) {
     // CORS support
-    $http.defaults.useXDomain = true;
-    delete $http.defaults.headers.common['X-Requested-With'];
+//    $http.defaults.useXDomain = true;
+//    delete $http.defaults.headers.common['X-Requested-With'];
+
 
     // Node is a class which we can use for retrieving and
     // updating data on the server
