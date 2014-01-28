@@ -1,8 +1,8 @@
 <h1 class="page-header">Sessions</h1>
 
 <ul class="list-unstyled container">
-    <li ng-repeat="session in sessions" class="panel panel-info">
-        <div class="panel-heading">
+    <li ng-repeat="session in sessions track by session.id" class="panel panel-info">
+    <div class="panel-heading">
             <div class="btn-group btn-group-xs pull-right">
                 <button type="button" class="btn btn-danger" ng-click="session.vote(-1)">-1</button>
                 <button type="button" class="btn btn-success" ng-click="session.vote(1)">+1</button>
