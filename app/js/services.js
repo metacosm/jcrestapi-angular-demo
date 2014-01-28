@@ -102,9 +102,6 @@ jcrServices.factory('DemoSession', function ($http) {
             jSumOfVotes = 0;
         }
 
-        $http.defaults.useXDomain = true;
-        delete $http.defaults.headers.common['X-Requested-With'];
-
         return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
             {
                 'properties': {
