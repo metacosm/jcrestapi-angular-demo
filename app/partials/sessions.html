@@ -2,12 +2,6 @@
 
 <ul class="list-unstyled container">
     <li ng-repeat="session in sessions" class="panel panel-info">
-        <div ng-controller="RatingCtrl" class="panel-heading">
-            <rating class="pull-right" value="rate" max="max" on-hover="hoveringOver(value)"
-                    on-leave="overStar = null"></rating>
-            <span class="label pull-right"
-                  ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"
-                  ng-show="overStar">{{percent}}%</span>
 
             <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
             </h2>
