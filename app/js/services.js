@@ -58,7 +58,7 @@ jcrServices.factory('DemoSession', function ($http) {
         return this.name ? this.name : "root";
     };
 
-    DemoSession.prototype.cleanedDescription = function() {
+    DemoSession.prototype.cleanedDescription = function () {
         return String(this.properties.text.value).replace(/<(?:.|\n)*?>/gm, '').replace('&amp;', '&')
             .replace('&rquot;', '\'').replace('&#39;', '\'').replace('&ldquo;', '\"').replace('&rdquo;', '"')
             .replace('&nbsp;', '');
@@ -67,8 +67,7 @@ jcrServices.factory('DemoSession', function ($http) {
     DemoSession.getSessions = function () {
         return $http.get(baseAPI + '/byType/genericnt__event?depth=1').then(function (response) {
             var sessions = [];
-            for ( var i in response.data )
-            {
+            for (var i in response.data) {
                 sessions.push(new DemoSession(response.data[i]));
             }
 
@@ -79,6 +78,45 @@ jcrServices.factory('DemoSession', function ($http) {
 
             return sessions;
         });
+    };
+
+    DemoSession.prototype.vote = function (value) {
+        var jmixRating = this.mixins.jmix__rating;
+
+        var jNbOfVotes = this.properties.j__nbOfVotes;
+        if (!jNbOfVotes) {
+            jNbOfVotes = 0;
+        }
+
+        var jSumOfVotes = this.properties.j__sumOfVotes;
+        if (!jSumOfVotes) {
+            jSumOfVotes = 0;
+        }
+
+        $http.defaults.useXDomain = true;
+        delete $http.defaults.headers.common['X-Requested-With'];
+
+        return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
+            {
+                'properties': {
+                    'j__lastVote': {
+                        'value' : value
+                    },
+                    'j__nbOfVotes': {
+                        'value' : jNbOfVotes + 1
+                    },
+                    'j__sumOfVotes': {
+                        'value' : jSumOfVotes + value
+                    }
+                }
+            }
+        ).then(function (response) {
+                alert('Vote recorded!');
+            }, function (error) {
+                alert(error.data.message);
+            }
+        );
+
     };
 
     return DemoSession;
