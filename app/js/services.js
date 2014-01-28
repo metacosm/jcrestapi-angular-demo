@@ -15,6 +15,14 @@ jcrServices.factory('DemoSession', function ($http) {
 //    delete $http.defaults.headers.common['X-Requested-With'];
 
 
+    // todo: extract login
+    $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxx&redirectActive=false')
+        .then(function (data) {
+            alert(data.data);
+        });
+
+
     // Node is a class which we can use for retrieving and
     // updating data on the server
     var DemoSession = function (data) {
@@ -101,13 +109,13 @@ jcrServices.factory('DemoSession', function ($http) {
             {
                 'properties': {
                     'j__lastVote': {
-                        'value' : value
+                        'value': value
                     },
                     'j__nbOfVotes': {
-                        'value' : jNbOfVotes + 1
+                        'value': jNbOfVotes + 1
                     },
                     'j__sumOfVotes': {
-                        'value' : jSumOfVotes + value
+                        'value': jSumOfVotes + value
                     }
                 }
             }
