@@ -10,8 +10,8 @@ var demoApp = angular.module('demoApp', [
     'ui.bootstrap'
 ]);
 
-demoApp.config(['$routeProvider', '$httpProvider',
-    function ($routeProvider, $httpProvider) {
+demoApp.config(['$routeProvider',
+    function ($routeProvider) {
         $routeProvider.
             when('/', {
                 redirectTo: '/api/nodes/root'
@@ -31,6 +31,4 @@ demoApp.config(['$routeProvider', '$httpProvider',
             otherwise({
                 redirectTo: '/'
             });
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }]);
