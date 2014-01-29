@@ -19,7 +19,7 @@ jcrServices.factory('DemoSession', function ($http) {
     $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxx&redirectActive=false')
         .then(function (data) {
-            alert(data.data);
+//            alert(data.data);
         });
 
 
