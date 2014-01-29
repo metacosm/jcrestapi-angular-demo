@@ -94,17 +94,24 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.getAndCreateIfInexistent = function(property, initialValue) {
+        return this.ensure(property, initialValue).value;
+    };
+
+    DemoSession.prototype.ensure = function(property, initialValue) {
         var prop = this.properties[property];
         if (!prop) {
             this.properties[property] = { 'value': initialValue};
         }
 
-        return prop.value;
+        return prop;
+    };
+
+    DemoSession.prototype.setAndCreateIfInexistent = function(property, value) {
+        this.ensure(property, value).value = value;
     };
 
     DemoSession.prototype.vote = function (value) {
-        var jNbOfVotes = this.getAndCreateIfInexistent('j__ndOfVotes', 0);
-
+        var jNbOfVotes = this.getAndCreateIfInexistent('j__nbOfVotes', 0);
         var jSumOfVotes = this.currentVotes();
 
         return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
