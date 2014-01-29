@@ -6,8 +6,7 @@ var demoApp = angular.module('demoApp', [
     'ngRoute',
 
     'demoControllers',
-    'jcrServices',
-    'ui.bootstrap'
+    'jcrServices'
 ]);
 
 demoApp.config(['$routeProvider',
