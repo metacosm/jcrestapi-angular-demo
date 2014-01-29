@@ -102,7 +102,7 @@ jcrServices.factory('DemoSession', function ($http) {
     DemoSession.prototype.vote = function (value) {
         var jNbOfVotes = 0;
         var prop = this.properties.j__nbOfVotes;
-        if (!prop) {
+        if (prop) {
             jNbOfVotes = prop.value;
         }
 
