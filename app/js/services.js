@@ -112,8 +112,11 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.vote = function (value) {
-        var jNbOfVotes = this.getAndCreateIfInexistent('j__nbOfVotes', 0);
-        var jSumOfVotes = this.currentVotes();
+        var nbOfVotes = this.ensure('j__nbOfVotes', 0);
+        nbOfVotes.value++;
+
+        var sumOfVotes = this.ensure('j__sumOfVotes', 0);
+        sumOfVotes.value += value;
 
         return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
             {
@@ -122,10 +125,10 @@ jcrServices.factory('DemoSession', function ($http) {
                         'value': value
                     },
                     'j__nbOfVotes': {
-                        'value': jNbOfVotes + 1
+                        'value': nbOfVotes.value
                     },
                     'j__sumOfVotes': {
-                        'value': jSumOfVotes + value
+                        'value': sumOfVotes.value
                     }
                 }
             }
