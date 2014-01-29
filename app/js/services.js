@@ -76,9 +76,9 @@ jcrServices.factory('DemoSession', function ($http) {
     DemoSession.getSessions = function () {
         return $http.get(baseAPI + '/byType/genericnt__event?depth=1').then(function (response) {
             var sessions = [];
-            for (var i in response.data) {
-                sessions.push(new DemoSession(response.data[i]));
-            }
+            response.data.forEach(function (session) {
+                sessions.push(new DemoSession(session));
+            });
 
             // make sure sessions are sorted by name (should be done using the query but doesn't work)
             sessions.sort(function (a, b) {
