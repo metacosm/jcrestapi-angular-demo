@@ -90,7 +90,7 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.currentVotes = function () {
-        return this.getAndCreateIfInexistent('j__sumOfVotes', 2);
+        return this.getAndCreateIfInexistent('j__sumOfVotes', 0);
     };
 
     DemoSession.prototype.getAndCreateIfInexistent = function(property, initialValue) {
