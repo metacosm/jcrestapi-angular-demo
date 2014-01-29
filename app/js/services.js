@@ -133,7 +133,7 @@ jcrServices.factory('DemoSession', function ($http) {
                 }
             }
         ).then(function (response) {
-                alert('Vote recorded!');
+                // alert('Vote recorded!');
             }, function (error) {
                 alert(error.data.message);
             }
