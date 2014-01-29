@@ -90,20 +90,20 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.currentVotes = function () {
-        var prop = this.properties.j__sumOfVotes;
+        return this.getAndCreateIfInexistent('j__sumOfVotes', 2);
+    };
+
+    DemoSession.prototype.getAndCreateIfInexistent = function(property, initialValue) {
+        var prop = this.properties[property];
         if (!prop) {
-            this.properties.j__sumOfVotes = { 'value': 0};
+            this.properties[property] = { 'value': initialValue};
         }
 
         return prop.value;
     };
 
     DemoSession.prototype.vote = function (value) {
-        var prop = this.properties.j__nbOfVotes;
-        if (!prop) {
-            this.properties.j__nbOfVotes = { 'value': 0};
-        }
-        var jNbOfVotes = prop.value;
+        var jNbOfVotes = this.getAndCreateIfInexistent('j__ndOfVotes', 0);
 
         var jSumOfVotes = this.currentVotes();
 
