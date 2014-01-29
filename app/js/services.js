@@ -91,20 +91,19 @@ jcrServices.factory('DemoSession', function ($http) {
 
     DemoSession.prototype.currentVotes = function () {
         var prop = this.properties.j__sumOfVotes;
-        if (prop) {
-            return prop.value;
+        if (!prop) {
+            this.properties.j__sumOfVotes = { 'value': 0};
         }
-        else {
-            return 0;
-        }
+
+        return prop.value;
     };
 
     DemoSession.prototype.vote = function (value) {
-        var jNbOfVotes = 0;
         var prop = this.properties.j__nbOfVotes;
-        if (prop) {
-            jNbOfVotes = prop.value;
+        if (!prop) {
+            this.properties.j__nbOfVotes = { 'value': 0};
         }
+        var jNbOfVotes = prop.value;
 
         var jSumOfVotes = this.currentVotes();
 
