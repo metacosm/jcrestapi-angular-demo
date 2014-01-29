@@ -2,10 +2,14 @@
 
 <ul class="list-unstyled container">
     <li ng-repeat="session in sessions track by session.id" class="panel panel-info">
-    <div class="panel-heading">
-            <div class="btn-group btn-group-xs pull-right">
-                <button type="button" class="btn btn-danger" ng-click="session.vote(-1)">-1</button>
-                <button type="button" class="btn btn-success" ng-click="session.vote(1)">+1</button>
+        <div class="panel-heading">
+            <div class="pull-right">
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-danger" ng-click="session.vote(-1)">-1</button>
+                    <button type="button" class="btn btn-success" ng-click="session.vote(1)">+1</button>
+                </div>
+
+                <span class="label label-primary">Current votes: {{session.currentVotes()}}</span>
             </div>
 
             <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
