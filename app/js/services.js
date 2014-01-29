@@ -101,6 +101,7 @@ jcrServices.factory('DemoSession', function ($http) {
         var prop = this.properties[property];
         if (!prop) {
             this.properties[property] = { 'value': initialValue};
+            return this.properties[property];
         }
 
         return prop;
