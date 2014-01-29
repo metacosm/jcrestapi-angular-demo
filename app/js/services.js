@@ -89,18 +89,24 @@ jcrServices.factory('DemoSession', function ($http) {
         });
     };
 
+    DemoSession.prototype.currentVotes = function () {
+        var prop = this.properties.j__sumOfVotes;
+        if (prop) {
+            return prop.value;
+        }
+        else {
+            return 0;
+        }
+    };
+
     DemoSession.prototype.vote = function (value) {
-        var jmixRating = this.mixins.jmix__rating;
-
-        var jNbOfVotes = this.properties.j__nbOfVotes;
-        if (!jNbOfVotes) {
-            jNbOfVotes = 0;
+        var jNbOfVotes = 0;
+        var prop = this.properties.j__nbOfVotes;
+        if (!prop) {
+            jNbOfVotes = prop.value;
         }
 
-        var jSumOfVotes = this.properties.j__sumOfVotes;
-        if (!jSumOfVotes) {
-            jSumOfVotes = 0;
-        }
+        var jSumOfVotes = this.currentVotes();
 
         return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
             {
