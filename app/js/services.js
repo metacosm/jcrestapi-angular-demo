@@ -69,8 +69,8 @@ jcrServices.factory('DemoSession', function ($http) {
 
     DemoSession.prototype.cleanedDescription = function () {
         return String(this.properties.text.value).replace(/<(?:.|\n)*?>/gm, '').replace('&amp;', '&')
-            .replace('&rquot;', '\'').replace('&#39;', '\'').replace('&ldquo;', '\"').replace('&rdquo;', '"')
-            .replace('&nbsp;', '');
+            .replace('&rsquo;', '\'').replace('&lsquo;', '\'').replace('&#39;', '\'')
+            .replace('&ldquo;', '\"').replace('&rdquo;', '"').replace('&nbsp;', '');
     };
 
     DemoSession.getSessions = function () {
