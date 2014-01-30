@@ -7,31 +7,35 @@
         </div>
 
         <div class="panel-body">
-            <ul class="list-unstyled">
-                <h2>Properties:</h2>
-                <li ng-repeat="prop in node.properties">
-                    <div class="row">
-                        <span class="col-sm-2"><strong>{{prop.name}}</strong>:</span>
-                        <span class="col-sm-10">{{prop.value}}</span>
-                    </div>
-                </li>
+            <ul class="list-unstyled panel panel-danger">
+                <div class="panel-heading"><h3 class="panel-title">Properties:</h3></div>
+                <div class="panel-body">
+                    <li ng-repeat="prop in node.properties">
+                        <div class="row">
+                            <span class="col-sm-2"><strong>{{prop.name}}</strong>:</span>
+                            <span class="col-sm-10">{{prop.value}}</span>
+                        </div>
+                    </li>
+                </div>
             </ul>
 
-            <ul class="list-unstyled">
-                <h2>Children:</h2>
-                    <div class="row">
+            <ul class="list-unstyled panel panel-warning">
+                <div class="panel-heading"><h3 class="panel-title">Children:</h3></div>
+                <div class="panel-body">
                     <li ng-repeat="child in node.childrenAsNode">
+                        <div class="row">
                         <span class="col-sm-2">
                             <strong><a ng-href="{{child.link('self')}}">{{child.safeName()}}</a></strong>:
                         </span>
-                        <span class="col-sm-10">{{child.type}}</span>
-                    </div>
-                </li>
+                            <span class="col-sm-10">{{child.type}}</span>
+                        </div>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>
 </div>
 
-        <a class="btn btn-sm btn-default" href="#/sessions">Back to sesssions</a>
+<a class="btn btn-sm btn-default" href="#/sessions">Back to sesssions</a>
 
 
