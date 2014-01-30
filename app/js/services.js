@@ -133,32 +133,33 @@ jcrServices.factory('DemoSession', function ($http) {
 
     DemoSession.prototype.vote = function (value) {
         var nbOfVotes = this.ensure('j__nbOfVotes', 0);
-        nbOfVotes.value++;
+        var newNbOfVotes = nbOfVotes.value + 1;
 
         var sumOfVotes = this.ensure('j__sumOfVotes', 0);
-        sumOfVotes.value += value;
+        var newSumOfVotes = sumOfVotes.value + value;
 
-        return $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
+        $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
             {
                 'properties': {
                     'j__lastVote': {
                         'value': value
                     },
                     'j__nbOfVotes': {
-                        'value': nbOfVotes.value
+                        'value': newNbOfVotes
                     },
                     'j__sumOfVotes': {
-                        'value': sumOfVotes.value
+                        'value': newSumOfVotes
                     }
                 }
             }
         ).then(function (response) {
-                // alert('Vote recorded!');
+                alert('Vote recorded!');
+                nbOfVotes.value = newNbOfVotes;
+                sumOfVotes.value = newSumOfVotes;
             }, function (error) {
                 alert(error.data.message);
             }
         );
-
     };
 
     return DemoSession;
