@@ -109,6 +109,10 @@ jcrServices.factory('DemoSession', function ($http) {
         return this.getAndCreateIfInexistent('j__sumOfVotes', 0);
     };
 
+    DemoSession.prototype.numberOfVotes = function () {
+        return this.getAndCreateIfInexistent('j__nbOfVotes', 0);
+    };
+
     DemoSession.prototype.getAndCreateIfInexistent = function(property, initialValue) {
         return this.ensure(property, initialValue).value;
     };
