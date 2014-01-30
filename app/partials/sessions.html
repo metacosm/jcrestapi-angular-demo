@@ -9,7 +9,8 @@
                     <button type="button" class="btn btn-success" ng-click="session.vote(1)">+1</button>
                 </div>
 
-                <span class="label label-primary">Current votes: {{session.currentVotes()}}</span>
+                <span class="label label-primary">Current score: {{session.currentVotes()}}</span>
+                <span class="label label-warning">Votes: {{session.numberOfVotes()}}</span>
             </div>
 
             <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.safeName()}}</a>
