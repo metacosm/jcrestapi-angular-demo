@@ -6,7 +6,7 @@ var demoControllers = angular.module('demoControllers', []);
 demoControllers.controller('NodeCtrl', ['$scope', '$routeParams', 'DemoSession',
     function ($scope, $routeParams, DemoSession) {
         var id = $routeParams.nodeId;
-        if (id && id != 'root') {
+        if (id && id !== 'root') {
             DemoSession.getById(id).then(function (node) {
                 $scope.node = node;
             });
