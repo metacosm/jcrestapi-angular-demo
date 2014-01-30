@@ -50,6 +50,15 @@ jcrServices.factory('DemoSession', function ($http) {
         });
     };
 
+    DemoSession.prototype.childrenAsNode = function() {
+        var result = [];
+        for(var i in this.children) {
+            result.push(new DemoSession(this.children[i]));
+        }
+
+        return result;
+    };
+
     // an instance method to create a new node
     DemoSession.prototype.create = function (parent) {
         var node = this;
