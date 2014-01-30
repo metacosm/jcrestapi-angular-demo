@@ -28,8 +28,8 @@ demoControllers.controller('PathCtrl', ['$scope', '$routeParams', 'DemoSession',
 ]);
 
 
-demoControllers.controller('SessionCtrl', ['$scope', '$routeParams', 'DemoSession',
-    function ($scope, $routeParams, DemoSession) {
+demoControllers.controller('SessionCtrl', ['$scope', 'DemoSession',
+    function ($scope, DemoSession) {
         DemoSession.getSessions().then(function (sessions) {
             $scope.sessions = sessions;
         });
