@@ -27,6 +27,15 @@ jcrServices.factory('DemoSession', function ($http) {
     // updating data on the server
     var DemoSession = function (data) {
         angular.extend(this, data);
+
+        var result = [];
+        for (var i in this.children) {
+            if (this.children.hasOwnProperty(i)) {
+                result.push(new DemoSession(this.children[i]));
+            }
+        }
+        this.childrenAsNode = result;
+
     };
 
     // a static method to retrieve a node by id
@@ -48,15 +57,6 @@ jcrServices.factory('DemoSession', function ($http) {
         return $http.get(byIdAPI).then(function (response) {
             return new DemoSession(response.data);
         });
-    };
-
-    DemoSession.prototype.childrenAsNode = function() {
-        var result = [];
-        for(var i in this.children) {
-            result.push(new DemoSession(this.children[i]));
-        }
-
-        return result;
     };
 
     // an instance method to create a new node

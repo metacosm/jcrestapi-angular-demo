@@ -19,8 +19,8 @@
 
             <ul class="list-unstyled">
                 <h2>Children:</h2>
-                <li ng-repeat="child in node.childrenAsNode()">
                     <div class="row">
+                    <li ng-repeat="child in node.childrenAsNode">
                         <span class="col-sm-2">
                             <strong><a ng-href="{{child.link('self')}}">{{child.safeName()}}</a></strong>:
                         </span>
