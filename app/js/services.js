@@ -64,13 +64,14 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.safeName = function () {
-        var title = this.properties.jcr__title;
-        if(title) {
-            return title.value;
+        if(this.properties) {
+            var title = this.properties.jcr__title;
+            if(title) {
+                return title.value;
+            }
         }
-        else {
-            return this.name ? this.name : "root";
-        }
+
+        return this.name ? this.name : "root";
     };
 
     DemoSession.prototype.cleanedDescription = function () {
