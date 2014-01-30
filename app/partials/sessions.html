@@ -12,7 +12,7 @@
                 <span class="label label-primary">Current votes: {{session.currentVotes()}}</span>
             </div>
 
-            <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.properties.jcr__title.value}}</a>
+            <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.safeName()}}</a>
             </h2>
 
         </div>

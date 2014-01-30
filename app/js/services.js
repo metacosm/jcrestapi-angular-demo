@@ -64,7 +64,13 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.safeName = function () {
-        return this.name ? this.name : "root";
+        var title = this.properties.jcr__title;
+        if(title) {
+            return title.value;
+        }
+        else {
+            return this.name ? this.name : "root";
+        }
     };
 
     DemoSession.prototype.cleanedDescription = function () {
