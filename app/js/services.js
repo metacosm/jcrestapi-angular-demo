@@ -73,9 +73,9 @@ jcrServices.factory('DemoSession', function ($http) {
     };
 
     DemoSession.prototype.safeName = function () {
-        if(this.properties) {
+        if (this.properties) {
             var title = this.properties.jcr__title;
-            if(title) {
+            if (title) {
                 return title.value;
             }
         }
@@ -113,11 +113,11 @@ jcrServices.factory('DemoSession', function ($http) {
         return this.getAndCreateIfInexistent('j__nbOfVotes', 0);
     };
 
-    DemoSession.prototype.getAndCreateIfInexistent = function(property, initialValue) {
+    DemoSession.prototype.getAndCreateIfInexistent = function (property, initialValue) {
         return this.ensure(property, initialValue).value;
     };
 
-    DemoSession.prototype.ensure = function(property, initialValue) {
+    DemoSession.prototype.ensure = function (property, initialValue) {
         var prop = this.properties[property];
         if (!prop) {
             this.properties[property] = { 'value': initialValue};
@@ -127,7 +127,7 @@ jcrServices.factory('DemoSession', function ($http) {
         return prop;
     };
 
-    DemoSession.prototype.setAndCreateIfInexistent = function(property, value) {
+    DemoSession.prototype.setAndCreateIfInexistent = function (property, value) {
         this.ensure(property, value).value = value;
     };
 
@@ -138,7 +138,15 @@ jcrServices.factory('DemoSession', function ($http) {
         var sumOfVotes = this.ensure('j__sumOfVotes', 0);
         var newSumOfVotes = sumOfVotes.value + value;
 
-        $http.put(byIdAPI + this.id + '/mixins/jmix__rating',
+        // which URI we use will determine if we're creating a mixin or updating a node that already has the mixin
+        // either way, we're just adding / modifying properties which uses the same data
+        var uri = byIdAPI + this.id; // session URI
+        if (nbOfVotes.value === 0) {
+            // we don't have any votes so we need to add the jmix:rating mixin to our session node
+            uri += '/mixins/jmix__rating';
+        }
+
+        $http.put(uri,
             {
                 'properties': {
                     'j__lastVote': {
