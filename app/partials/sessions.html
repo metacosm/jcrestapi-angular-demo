@@ -5,12 +5,13 @@
         <div class="panel-heading">
             <div class="pull-right">
                 <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-danger" ng-click="session.vote(-1)">-1</button>
+                    <button type="button" class="btn btn-warning" ng-click="session.vote(-1)">-1</button>
                     <button type="button" class="btn btn-success" ng-click="session.vote(1)">+1</button>
                 </div>
 
                 <span class="label label-primary">Current score: {{session.currentVotes()}}</span>
                 <span class="label label-warning">Votes: {{session.numberOfVotes()}}</span>
+                <button type="button" class="btn btn-xs btn-danger" ng-click="session.resetVotes()">Reset</button>
             </div>
 
             <h2 class="panel-title"><a ng-href="{{session.link('self')}}">{{session.safeName()}}</a>

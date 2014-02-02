@@ -170,5 +170,20 @@ jcrServices.factory('DemoSession', function ($http) {
         );
     };
 
+    DemoSession.prototype.resetVotes = function () {
+        var uri = byIdAPI + this.id + '/mixins/jmix__rating';
+        var nbOfVotes = this.ensure('j__nbOfVotes', 0);
+        var sumOfVotes = this.ensure('j__sumOfVotes', 0);
+
+        $http.delete(uri).then(function (response) {
+                alert('Vote reset!');
+                nbOfVotes.value = 0;
+                sumOfVotes.value = 0;
+            }, function (error) {
+                alert(error.data.message);
+            }
+        );
+    };
+
     return DemoSession;
 });
