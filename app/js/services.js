@@ -9,18 +9,10 @@ var byPathAPI = baseAPI + '/byPath/';
 var byIdAPI = baseAPI + '/nodes/';
 
 // Based on http://stackoverflow.com/questions/11850025/recommended-way-of-getting-data-from-the-server
-jcrServices.factory('DemoSession', function ($http) {
+jcrServices.factory('DemoSession', function ($http, $cookies) {
     // CORS support
 //    $http.defaults.useXDomain = true;
 //    delete $http.defaults.headers.common['X-Requested-With'];
-
-
-    // todo: extract login
-    $http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxx&redirectActive=false')
-        .then(function (data) {
-//            alert(data.data);
-        });
 
 
     // Node is a class which we can use for retrieving and
@@ -36,6 +28,16 @@ jcrServices.factory('DemoSession', function ($http) {
         }
         this.childrenAsNode = result;
 
+    };
+
+    // todo: extract login
+    DemoSession.login = function($cookies) {
+        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxxxxx&redirectActive=false')
+            .then(function (data) {
+                // cookie is sent with HTTP Only so cannot work here :(
+//                var jsessionid = $cookies.get('JSESSIONID');
+//                alert(jsessionid);
+            });
     };
 
     // a static method to retrieve a node by id
@@ -186,6 +188,9 @@ jcrServices.factory('DemoSession', function ($http) {
             }
         );
     };
+
+
+    DemoSession.login();
 
     return DemoSession;
 });
