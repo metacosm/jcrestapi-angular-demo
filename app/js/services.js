@@ -64,67 +64,6 @@ jcrServices.factory('DemoSession', function ($http) {
         });
     };
 
-    DemoSession.prototype.currentVotes = function () {
-        return this.getAndCreateIfInexistent('j__sumOfVotes', 0);
-    };
-
-    DemoSession.prototype.numberOfVotes = function () {
-        return this.getAndCreateIfInexistent('j__nbOfVotes', 0);
-    };
-
-    DemoSession.prototype.getAndCreateIfInexistent = function (property, initialValue) {
-        return this.ensure(property, initialValue).value;
-    };
-
-    DemoSession.prototype.ensure = function (property, initialValue) {
-        var prop = this.properties[property];
-        if (!prop) {
-            this.properties[property] = { 'value': initialValue};
-            return this.properties[property];
-        }
-
-        return prop;
-    };
-
-    DemoSession.prototype.vote = function (value) {
-        var nbOfVotes = this.ensure('j__nbOfVotes', 0);
-        var newNbOfVotes = nbOfVotes.value + 1;
-
-        var sumOfVotes = this.ensure('j__sumOfVotes', 0);
-        var newSumOfVotes = sumOfVotes.value + value;
-
-        // which URI we use will determine if we're creating a mixin or updating a node that already has the mixin
-        // either way, we're just adding / modifying properties which uses the same data
-        var uri = byIdAPI + this.id; // session URI
-        if (nbOfVotes.value === 0) {
-            // we don't have any votes so we need to add the jmix:rating mixin to our session node
-            uri += '/mixins/jmix__rating';
-        }
-
-        $http.put(uri,
-            {
-                'properties': {
-                    'j__lastVote': {
-                        'value': value
-                    },
-                    'j__nbOfVotes': {
-                        'value': newNbOfVotes
-                    },
-                    'j__sumOfVotes': {
-                        'value': newSumOfVotes
-                    }
-                }
-            }
-        ).then(function (response) {
-                alert('Vote recorded!');
-                nbOfVotes.value = newNbOfVotes;
-                sumOfVotes.value = newSumOfVotes;
-            }, function (error) {
-                alert(error.data.message);
-            }
-        );
-    };
-
     DemoSession.login();
 
     return DemoSession;
