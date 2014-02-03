@@ -102,6 +102,8 @@ jcrServices.factory('DemoSession', function ($http) {
             });
 
             return sessions;
+        }, function(error) {
+            alert(error.data.message);
         });
     };
 
