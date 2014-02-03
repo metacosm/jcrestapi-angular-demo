@@ -40,31 +40,6 @@ jcrServices.factory('DemoSession', function ($http) {
             });
     };
 
-    // a static method to retrieve a node by id
-    DemoSession.getById = function (id) {
-        return $http.get(byIdAPI + id).then(function (response) {
-            return new DemoSession(response.data);
-        });
-    };
-
-    // a static method to retrieve a node by its path
-    DemoSession.getByPath = function (path) {
-        return $http.get(byPathAPI + path).then(function (response) {
-            return new DemoSession(response.data);
-        });
-    };
-
-    // retrieve the root node
-    DemoSession.getRoot = function () {
-        return $http.get(byIdAPI).then(function (response) {
-            return new DemoSession(response.data);
-        });
-    };
-
-    DemoSession.prototype.link = function (rel) {
-        return '#' + this._links[rel].href;
-    };
-
     DemoSession.prototype.cleanedDescription = function () {
         return String(this.properties.text.value).replace(/<(?:.|\n)*?>/gm, '').replace('&amp;', '&')
             .replace('&rsquo;', '\'').replace('&lsquo;', '\'').replace('&#39;', '\'')
@@ -84,7 +59,7 @@ jcrServices.factory('DemoSession', function ($http) {
             });
 
             return sessions;
-        }, function(error) {
+        }, function (error) {
             alert(error.data.message);
         });
     };
