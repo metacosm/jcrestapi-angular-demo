@@ -34,12 +34,6 @@ jcrServices.factory('DemoSession', function ($http) {
 
     };
 
-    DemoSession.login = function () {
-        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=jahiaoneWar5jx.&redirectActive=false')
-            .then(function (data) {
-            });
-    };
-
     DemoSession.prototype.cleanedDescription = function () {
         return String(this.properties.text.value).replace(/<(?:.|\n)*?>/gm, '').replace('&amp;', '&')
             .replace('&rsquo;', '\'').replace('&lsquo;', '\'').replace('&#39;', '\'')
@@ -63,8 +57,6 @@ jcrServices.factory('DemoSession', function ($http) {
             alert(error.data.message);
         });
     };
-
-    DemoSession.login();
 
     return DemoSession;
 });
