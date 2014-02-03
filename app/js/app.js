@@ -4,7 +4,6 @@
 
 var demoApp = angular.module('demoApp', [
     'ngRoute',
-    'ngCookies',
 
     'demoControllers',
     'jcrServices'

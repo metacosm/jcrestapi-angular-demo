@@ -8,14 +8,9 @@ var baseAPI = base + '/api';
 var byPathAPI = baseAPI + '/byPath/';
 var byIdAPI = baseAPI + '/nodes/';
 
-// Based on http://stackoverflow.com/questions/11850025/recommended-way-of-getting-data-from-the-server
-jcrServices.factory('DemoSession', function ($http, $cookies) {
-    // CORS support
-//    $http.defaults.useXDomain = true;
-//    delete $http.defaults.headers.common['X-Requested-With'];
+jcrServices.factory('DemoSession', function ($http) {
 
-
-    // Node is a class which we can use for retrieving and
+    // DemoSession is a class which we can use for retrieving and
     // updating data on the server
     var DemoSession = function (data) {
         angular.extend(this, data);
@@ -39,13 +34,9 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
 
     };
 
-    // todo: extract login
-    DemoSession.login = function($cookies) {
-        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxxxxx&redirectActive=false')
+    DemoSession.login = function () {
+        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=jahiaoneWar5jx.&redirectActive=false')
             .then(function (data) {
-                // cookie is sent with HTTP Only so cannot work here :(
-//                var jsessionid = $cookies.get('JSESSIONID');
-//                alert(jsessionid);
             });
     };
 
@@ -67,15 +58,6 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
     DemoSession.getRoot = function () {
         return $http.get(byIdAPI).then(function (response) {
             return new DemoSession(response.data);
-        });
-    };
-
-    // an instance method to create a new node
-    DemoSession.prototype.create = function (parent) {
-        var node = this;
-        return $http.put(byIdAPI + parent.id, node).then(function (response) {
-            node.id = response.data.id;
-            return node;
         });
     };
 
@@ -127,10 +109,6 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
         }
 
         return prop;
-    };
-
-    DemoSession.prototype.setAndCreateIfInexistent = function (property, value) {
-        this.ensure(property, value).value = value;
     };
 
     DemoSession.prototype.vote = function (value) {
