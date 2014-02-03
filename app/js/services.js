@@ -28,6 +28,15 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
         }
         this.childrenAsNode = result;
 
+        var safeName = this.name ? this.name : "root";
+        if (this.properties) {
+            var title = this.properties.jcr__title;
+            if (title) {
+                safeName = title.value;
+            }
+        }
+        this.safeName = safeName;
+
     };
 
     // todo: extract login
@@ -72,17 +81,6 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
 
     DemoSession.prototype.link = function (rel) {
         return '#' + this._links[rel].href;
-    };
-
-    DemoSession.prototype.safeName = function () {
-        if (this.properties) {
-            var title = this.properties.jcr__title;
-            if (title) {
-                return title.value;
-            }
-        }
-
-        return this.name ? this.name : "root";
     };
 
     DemoSession.prototype.cleanedDescription = function () {
