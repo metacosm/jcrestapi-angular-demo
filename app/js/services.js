@@ -41,7 +41,7 @@ jcrServices.factory('DemoSession', function ($http, $cookies) {
 
     // todo: extract login
     DemoSession.login = function($cookies) {
-        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=xxxxxxxxxx&redirectActive=false')
+        $http.post('http://localhost:8080/cms/login?doLogin=true&restMode=true&username=root&password=password&redirectActive=false')
             .then(function (data) {
                 // cookie is sent with HTTP Only so cannot work here :(
 //                var jsessionid = $cookies.get('JSESSIONID');
